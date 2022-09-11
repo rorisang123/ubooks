@@ -44,7 +44,7 @@ export function Sell() {
           </h4>
           <div className="book-summary-addtocart">Sell book</div>
         </div>
-        <div className="book-thumbnail-price">R {book.price}</div>
+        <div className="book-thumbnail-price"></div>
       </div>
     </Link>
   ));

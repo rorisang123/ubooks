@@ -30,7 +30,7 @@ function App() {
         <Route exact path="/orders">
           <Orders />
         </Route>
-        <Route rxact path="/sell">
+        <Route exact path="/sell">
           <Sell />
         </Route>
         <Route exact path="/sell/:slug">

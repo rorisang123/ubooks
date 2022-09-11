@@ -183,6 +183,34 @@ html {
   margin-top: 0;
 }
 
+.book-details-merchant-summary {
+  padding: 40px;
+}
+
+.book-details-merchant-summary h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 18px;
+  text-align: center;
+
+  margin: 0px;
+
+  color: #7e7e7e;
+}
+
+.book-listing-condition-group {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 18px;
+
+  margin: 0;
+}
+
+.book-listing-details {
+  text-align: center;
+}
+
 /*-------------- 3 ---------*/
 
 /*-------------- 4 ---------*/

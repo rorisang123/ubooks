@@ -9,15 +9,23 @@ export function SellListing() {
 
   let book = {
     id: 1,
+    isbn: "123456XA",
     src: "romeojuliet",
     title: "Romeo and Juliet",
     author: "William Shakespeare",
+    year: 1840,
     pageCount: 299,
     condition: "Brand new",
     description:
       "Sed in vestibulum nibh. Phasellus finibus ac ante sed facilisis. Phasellus justo orci, dapibus et velit at, laoreet luctus est. Phasellus ut justo ut orci tincidunt euismod. Cras nunc purus, sodales eget aliquam consequat, accumsan quis tortor.",
     price: 250,
   };
+
+  const [condition, setCondition] = useState(book.condition);
+  function onConditionChange(event) {
+    setCondition(event.target.value);
+  }
+
   return (
     <div id="book-details" className="page-whitebackground">
       <header className="header1burger header-red">
@@ -41,22 +49,23 @@ export function SellListing() {
           <h2>{book.title}</h2>
           <h3>{book.author}</h3>
         </div>
-        <div className="book-details-consumer-summary">
-          <div className="book-details-consumer-summary-left">
-            <h2>{book.condition}</h2>
-            <h3>Condition</h3>
-          </div>
-          <div className="book-details-consumer-summary-divider"></div>
-          <div className="book-details-consumer-summary-right">
-            <h2>R {book.price}</h2>
-            <h3>Price</h3>
+        <div className="book-details-merchant-summary">
+          <h2>ISBN: {book.isbn}</h2>
+          <h2>Year: {book.year}</h2>
+        </div>
+        <div className="book-listing-details">
+          <h2>Condition</h2>
+          <div
+            className="book-listing-condition-group"
+            onChange={onConditionChange}
+          >
+            <input type="radio" value="Brand new" name="condition" /> Brand new
+            <input type="radio" value="Good" name="condition" /> Good
+            <input type="radio" value="Fair" name="condition" />
+            Fair
           </div>
         </div>
-        <div className="book-details-description">
-          <h2>Description</h2>
-          {book.description}
-        </div>
-        <div className="book-details-addtocart">Add to cart</div>
+        <div className="book-details-addtocart">Sell this book</div>
       </main>
     </div>
   );
