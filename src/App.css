@@ -10,6 +10,10 @@ html {
   text-decoration: none;
 }
 
+.right-align {
+  margin-left: auto;
+}
+
 .page-redbackground {
   background-color: #f76d6d;
   height: 100vh;
@@ -211,7 +215,56 @@ html {
   text-align: center;
 }
 
-/*-------------- 3 ---------*/
+/*-------------- Cart ---------*/
+#booksInCart h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+#cart-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-total {
+  width: 80%;
+  position: absolute;
+  bottom: 0;
+  height: 20vh;
+}
+
+.cart-total-text {
+  display: flex;
+}
+
+.cart-total-text h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 17px;
+}
+
+.cart-checkout {
+  width: 329px;
+  height: 45px;
+  left: 42px;
+  top: 176px;
+
+  background: #f7eaa0;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+}
 
 /*-------------- 4 ---------*/
 
