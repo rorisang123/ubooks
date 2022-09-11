@@ -7,6 +7,7 @@ import {
   Home,
   Login,
   Orders,
+  OrderListing,
   Sell,
   SellListing,
 } from "./pages";
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact path="/orders">
           <Orders />
+        </Route>
+        <Route exact path="/order/:slug">
+          <OrderListing />
         </Route>
         <Route exact path="/sell">
           <Sell />
