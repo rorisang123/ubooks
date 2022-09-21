@@ -11,15 +11,7 @@ const initialState = {
 export const fetchCart = createAsyncThunk("cart/fetchCart", async (cartId) => {
   let cart = {
     total: 0,
-    items: [
-      {
-        bookId: 1,
-        src: "",
-        title: "",
-        author: "",
-        price: 0,
-      },
-    ],
+    items: [],
   };
 
   // Get cart total
@@ -60,14 +52,9 @@ const cartSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchCart.fulfilled, (state, action) => {
-        /*const response = action.payload;
-        state.cart.items = response;
-        console.log("response: ", response);
-        state.showLoading = false;*/
-
-        state.cart = [];
+        state.items = [];
         const response = action.payload;
-        response.forEach((item) => state.cart.items.push(item));
+        response.forEach((item) => state.items.push(item));
         state.showLoading = false;
       })
       .addCase(fetchCart.rejected, (state, action) => {
