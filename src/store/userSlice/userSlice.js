@@ -7,6 +7,7 @@ const initialState = {
   name: "",
   email: "",
   cartId: "5UKKJSjkqiqq5PYbLo0S",
+  orders: ["HH7rzhCt9pSUt8xP2CGX"],
   showLoading: true,
 };
 

@@ -15,23 +15,7 @@ import {
 
 const initialState = {
   showLoading: true,
-  books: [
-    {
-      id: "",
-      available: false,
-      sellerId: "",
-      src: "",
-      image: "",
-      title: "",
-      author: "",
-      pageCount: 0,
-      price: 0,
-      isbn: "",
-      year: 2000,
-      condition: "",
-      description: "",
-    },
-  ],
+  books: [],
 };
 
 export const fetchBooks = createAsyncThunk("books/fetchBooks", async () => {

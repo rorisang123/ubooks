@@ -20,8 +20,8 @@ export function Buy() {
 
   /* End books state management */
 
-  let renderedBooks = books.map((book) => (
-    <Link to={"/buy/" + book.id} key={book.id}>
+  let renderedBooks = books.map((book, n) => (
+    <Link to={"/buy/" + book.id} key={n}>
       <div className="book">
         <div className="book-thumbnail-cover">
           <img

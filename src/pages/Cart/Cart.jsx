@@ -9,7 +9,7 @@ export function Cart() {
 
   //const cartId = useSelector((state) => state.user.cartId);
   const cartId = "5UKKJSjkqiqq5PYbLo0S";
-  /* Books state management */
+  /* Cart state management */
 
   const showLoading = useSelector((state) => state.books.showLoading);
   const cart = useSelector((state) => state.cart);
@@ -17,7 +17,7 @@ export function Cart() {
     dispatch(fetchCart(cartId));
   }, []);
 
-  /* End books state management */
+  /* End cart state management */
 
   let booksInCart = cart.items.map((book) => (
     <div className="book" key={book.id}>

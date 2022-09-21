@@ -1,30 +1,35 @@
 import arrow from "../../assets/arrowred.png";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchOrders } from "../../store/ordersSlice/ordersSlice";
 
 export function Orders() {
-  let orders = [
-    {
-      id: "PX123445",
-      date: "18 July 2022",
-      status: "Ordered",
-      total: 250,
-    },
-    {
-      id: "PX123449",
-      date: "25 August 2022",
-      status: "Collected",
-      total: 500,
-    },
-  ];
+  const dispatch = useDispatch();
 
-  let renderedOrders = orders.map((order) => (
-    <Link to={"/order/" + order.id} key={order.id}>
+  /* Orders state management */
+  const showLoading = useSelector((state) => state.books.showLoading);
+  const orders = useSelector((state) => state.orders.orders);
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, []);
+  /* End orders state management */
+
+  let renderedOrders = orders.map((order, n) => (
+    <Link to={"/order/" + order.id} key={n}>
       <div className="order">
         <div className="order-left">{order.id}</div>
         <div className="order-right">
           <h3>{order.date}</h3>
           <h2>R{order.total}</h2>
-          <h3>Status: {order.status}</h3>
+          <h3>
+            Status:
+            {order.isCollected
+              ? " collected"
+              : order.isPayed
+              ? " payed"
+              : " ordered"}
+          </h3>
         </div>
       </div>
     </Link>
