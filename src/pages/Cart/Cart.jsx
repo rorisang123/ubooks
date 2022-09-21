@@ -1,28 +1,23 @@
 import arrow from "../../assets/arrowred.png";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCart } from "../../store/cartsSlice/cartsSlice";
 
 export function Cart() {
-  let cart = {
-    subtotal: 1000,
-    total: 950,
-    discount: 50,
-    items: [
-      {
-        id: 1,
-        src: "romeojuliet",
-        title: "Romeo and Juliet",
-        author: "William Shakespeare",
-        price: 250,
-      },
-      {
-        id: 2,
-        src: "romeojuliet",
-        title: "Macbeth",
-        author: "William Shakespeare",
-        price: 250,
-      },
-    ],
-  };
+  const dispatch = useDispatch();
+
+  //const cartId = useSelector((state) => state.user.cartId);
+  const cartId = "5UKKJSjkqiqq5PYbLo0S";
+  /* Books state management */
+
+  const showLoading = useSelector((state) => state.books.showLoading);
+  const cart = useSelector((state) => state.cart);
+  useEffect(() => {
+    dispatch(fetchCart(cartId));
+  }, []);
+
+  /* End books state management */
 
   let booksInCart = cart.items.map((book) => (
     <div className="book" key={book.id}>

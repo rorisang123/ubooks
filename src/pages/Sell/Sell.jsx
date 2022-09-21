@@ -2,29 +2,23 @@ import arrow from "../../assets/arrowred.png";
 import search from "../../assets/searchblack.png";
 import pages from "../../assets/pages.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchBooks } from "../../store/booksSlice/booksSlice";
 
 export function Sell() {
   const [searchWord, setSearchWord] = useState("");
 
-  let books = [
-    {
-      id: 1,
-      src: "romeojuliet",
-      title: "Romeo and Juliet",
-      author: "William Shakespeare",
-      pageCount: 299,
-      price: 250,
-    },
-    {
-      id: 2,
-      src: "romeojuliet",
-      title: "Macbeth",
-      author: "William Shakespeare",
-      pageCount: 299,
-      price: 250,
-    },
-  ];
+  /* Books state management */
+  const dispatch = useDispatch();
+
+  const showLoading = useSelector((state) => state.books.showLoading);
+  const books = useSelector((state) => state.books.books);
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, []);
+
+  /* End books state management */
 
   let renderedBooks = books.map((book) => (
     <Link to={"/sell/" + book.id} key={book.id}>

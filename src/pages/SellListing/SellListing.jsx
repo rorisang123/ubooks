@@ -2,25 +2,25 @@ import arrow from "../../assets/arrowred.png";
 import search from "../../assets/searchblack.png";
 import pages from "../../assets/pages.png";
 import { Link, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchBooks } from "../../store/booksSlice/booksSlice";
 
 export function SellListing() {
   let { slug } = useParams();
+  const dispatch = useDispatch();
 
-  let book = {
-    id: 1,
-    isbn: "123456XA",
-    src: "romeojuliet",
-    title: "Romeo and Juliet",
-    author: "William Shakespeare",
-    year: 1840,
-    pageCount: 299,
-    condition: "Brand new",
-    description:
-      "Sed in vestibulum nibh. Phasellus finibus ac ante sed facilisis. Phasellus justo orci, dapibus et velit at, laoreet luctus est. Phasellus ut justo ut orci tincidunt euismod. Cras nunc purus, sodales eget aliquam consequat, accumsan quis tortor.",
-    price: 250,
-  };
+  // Fetch firestore data into redux when page loads
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
 
+  // Selectors
+  const book = useSelector((state) =>
+    state.books.books.find((book) => book.id === slug)
+  );
+
+  // Handle condition state
   const [condition, setCondition] = useState(book.condition);
   function onConditionChange(event) {
     setCondition(event.target.value);

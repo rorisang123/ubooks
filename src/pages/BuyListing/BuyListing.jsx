@@ -1,23 +1,30 @@
 import arrow from "../../assets/arrowred.png";
-import search from "../../assets/searchblack.png";
-import pages from "../../assets/pages.png";
 import { Link, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchBooks } from "../../store/booksSlice/booksSlice";
 
 export function BuyListing() {
   let { slug } = useParams();
+  const dispatch = useDispatch();
 
-  let book = {
-    id: 1,
-    src: "romeojuliet",
-    title: "Romeo and Juliet",
-    author: "William Shakespeare",
-    pageCount: 299,
-    condition: "Brand new",
-    description:
-      "Sed in vestibulum nibh. Phasellus finibus ac ante sed facilisis. Phasellus justo orci, dapibus et velit at, laoreet luctus est. Phasellus ut justo ut orci tincidunt euismod. Cras nunc purus, sodales eget aliquam consequat, accumsan quis tortor.",
-    price: 250,
-  };
+  // Fetch firestore data into redux when page loads
+  useEffect(() => {
+    dispatch(fetchBooks());
+  }, [dispatch]);
+
+  // Selectors
+  const book = useSelector((state) =>
+    state.books.books.find((book) => book.id === slug)
+  );
+
+  const [title, setTitle] = useState("-");
+  const [author, setAuthor] = useState("-");
+  const [condition, setCondition] = useState("-");
+  const [price, setPrice] = useState("-");
+  const [image, setImage] = useState("-");
+  const [description, setDescription] = useState("-");
+
   return (
     <div id="book-details" className="page-whitebackground">
       <header className="header1burger header-red">
@@ -33,7 +40,11 @@ export function BuyListing() {
       <main id="book-details-main">
         <div className="book-details-cover">
           <img
-            src={require("../../assets/covers/romeojuliet2.png")}
+            src={
+              book.image
+                ? require("../../assets/covers/" + book.image + ".png")
+                : require("../../assets/covers/undefined.png")
+            }
             alt="book cover"
           />
         </div>

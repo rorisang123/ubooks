@@ -3,10 +3,36 @@ import hamburger from "../../assets/hamburger.png";
 import textlogo from "../../assets/UBOOKS.png";
 import { Link } from "react-router-dom";
 import closeIcon from "../../assets/x.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 export function Home() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const [showMenu, setShowMenu] = useState(false);
+  const showLoading = useSelector((state) => state.user.showLoading);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //////// auth
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (userFb) => {
+      if (userFb) {
+        // User is signed in
+        setIsLoggedIn(true);
+      } else {
+        // User is signed out
+        console.log("User is signed out");
+        history.push("/login");
+      }
+    });
+  }, []);
+  //////// end auth
 
   var page = (
     <div id="home" className="page-redbackground">
@@ -62,5 +88,17 @@ export function Home() {
     </div>
   );
 
+  let content;
+  if (showMenu) {
+    content = popup;
+  } else {
+    if (showLoading) {
+      content = <div>Loading</div>;
+    } else {
+      content = page;
+    }
+  }
+
   return <>{showMenu ? popup : page}</>;
+  //return <>{isLoggedIn ? content : "checking auth status"}</>;
 }
